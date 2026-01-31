@@ -31,13 +31,13 @@ $total_sold = $tickets_data['total_sold'];
 
     <title>Admin Financial Dashboard</title>
     <style>
-        body { font-family: sans-serif; background-color: #111827; color: #F9FAFB; padding: 20px; }
+        body { font-family: sans-serif; background-color: #111827; color: #000000; padding: 20px; }
         .stats-box { display: flex; gap: 20px; }
-        .card { background: #1F2937; padding: 20px; border-radius: 8px; width: 200px; text-align: center; color: #F9FAFB; }
-        .card h2 { color: #F9FAFB; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; color: #F9FAFB; }
+        .card { background: #1F2937; padding: 20px; border-radius: 8px; width: 200px; text-align: center; color: #000000; }
+        .card h2 { color: #000000; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; color: #000000; }
         th, td { border: 1px solid #9CA3AF; padding: 10px; text-align: left; }
-        th { background-color: #1F2937; color: #F9FAFB; }
+        th { background-color: #1F2937; color: #000000; }
         a { color: #00E5FF; }
     </style>
 </head>

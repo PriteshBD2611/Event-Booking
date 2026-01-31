@@ -35,15 +35,15 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     <link rel="stylesheet" href="style.css">
     <title><?php echo $event['title']; ?> - Details</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background-color: #111827; color: #F9FAFB; }
-        .nav { background: #1F2937; padding: 10px; color: white; margin-bottom: 20px; }
-        .nav a { color: #F9FAFB; margin-right: 15px; text-decoration: none; }
-        .event-details { max-width: 800px; margin: 0 auto; background: #1F2937; padding: 20px; border-radius: 8px; color: #F9FAFB; }
+        body { font-family: sans-serif; padding: 20px; background-color: #111827; color: #000000; }
+        .nav { background: #1F2937; padding: 10px; color: #000000; margin-bottom: 20px; }
+        .nav a { color: #000000; margin-right: 15px; text-decoration: none; }
+        .event-details { max-width: 800px; margin: 0 auto; background: #1F2937; padding: 20px; border-radius: 8px; color: #000000; }
         .event-image { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
         .map { width: 100%; height: 300px; border: none; }
         .reviews { margin-top: 20px; }
-        .review { border-bottom: 1px solid #9CA3AF; padding: 10px 0; color: #F9FAFB; }
-        button { background-color: #8B5CF6; color: #F9FAFB; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+        .review { border-bottom: 1px solid #9CA3AF; padding: 10px 0; color: #000000; }
+        button { background-color: #8B5CF6; color: #000000; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
         button:hover { background-color: #00E5FF; }
     </style>
     <script src="https://www.paypal.com/sdk/js?client-id=Ad3PJuzwknTqCnmIMI767plher_kOKbRB2R3JK_dooW8GNFt0Gh4o3GBsaYCyI09CBhzNFdvlLTzc_UK&currency=INR"></script>
@@ -68,10 +68,10 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     
     <h1><?php echo $event['title']; ?> <small style="color: #9CA3AF;">(<?php echo $event['category']; ?>)</small></h1>
     
-    <p style="color: #9CA3AF;"><strong style="color: #F9FAFB;">Speaker:</strong> <?php echo $event['speaker'] ? $event['speaker'] : 'TBA'; ?></p>
-    <p style="color: #9CA3AF;"><strong style="color: #F9FAFB;">Description:</strong> <?php echo $event['description']; ?></p>
-    <p style="color: #9CA3AF;"><strong style="color: #F9FAFB;">Price:</strong> ₹<?php echo $event['price']; ?></p>
-    <p style="color: #9CA3AF;"><strong style="color: #F9FAFB;">Date:</strong> <?php echo $event['event_date']; ?></p>
+    <p style="color: #000000;"><strong style="color: #000000;">Speaker:</strong> <?php echo $event['speaker'] ? $event['speaker'] : 'TBA'; ?></p>
+    <p style="color: #000000;"><strong style="color: #000000;">Description:</strong> <?php echo $event['description']; ?></p>
+    <p style="color: #000000;"><strong style="color: #000000;">Price:</strong> ₹<?php echo $event['price']; ?></p>
+    <p style="color: #000000;"><strong style="color: #000000;">Date:</strong> <?php echo $event['event_date']; ?></p>
     
     <?php if ($has_booked): ?>
         <p style="color: green;"><strong>You have booked this event!</strong></p>
@@ -85,8 +85,8 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
         <?php if (mysqli_num_rows($reviews_result) > 0): ?>
             <?php while ($review = mysqli_fetch_assoc($reviews_result)): ?>
                 <div class="review">
-                    <strong style="color: #F9FAFB;"><?php echo $review['username']; ?>:</strong> <span style="color: #F9FAFB;"><?php echo str_repeat('⭐', $review['rating']); ?> (<?php echo $review['rating']; ?>/5)</span><br>
-                    <span style="color: #9CA3AF;"><?php echo $review['comment']; ?></span>
+                    <strong style="color: #000000;"><?php echo $review['username']; ?>:</strong> <span style="color: #000000;"><?php echo str_repeat('⭐', $review['rating']); ?> (<?php echo $review['rating']; ?>/5)</span><br>
+                    <span style="color: #000000;"><?php echo $review['comment']; ?></span>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
@@ -96,13 +96,52 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     
     <br>
     <a href="index.php"><button>Back to Home</button></a>
+
     <?php if (!$has_booked && $event['price'] > 0): ?>
-        <button id="showPurchaseBtn">Purchase & Book</button>
-        <div id="purchase" style="display:none; margin-top:16px;">
-            <label style="color:#9CA3AF;">Quantity</label>
-            <input type="number" id="ticket-qty" min="1" value="1" style="width:80px; padding:8px; border-radius:8px; margin:8px 0; background:#020617; color:#e5e7eb; border:1px solid #1e293b;">
+        <div style="display:flex; gap:12px; justify-content:center; margin-top:12px;">
+            <button id="openSeatMap">Select Seat & Book</button>
+            <button id="showPurchaseBtn">Purchase without Seat</button>
+        </div>
+
+        <div id="purchase" style="display:none; margin-top:16px; text-align:center;">
+            <label>Quantity</label>
+            <input type="number" id="ticket-qty" min="1" value="1" style="width:80px; padding:8px; border-radius:8px; margin:8px 0; background:#020617; color:#000000; border:1px solid #1e293b;">
             <div id="paypal-button-container"></div>
         </div>
+
+        <!-- Seat Selection Modal -->
+        <div id="seatModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3>Select a Seat</h3>
+                <div id="seat-grid">
+                <?php
+                    $booked_q = "SELECT seat_number FROM bookings WHERE event_id = '$event_id'";
+                    $res_bs = mysqli_query($conn, $booked_q);
+                    $booked_arr = [];
+                    while ($b = mysqli_fetch_assoc($res_bs)) { $booked_arr[] = $b['seat_number']; }
+
+                    for ($i=1; $i<=50; $i++) {
+                        if (in_array($i, $booked_arr)) {
+                            echo "<div class='seat booked' data-seat='$i'>" . $i . "</div>";
+                        } else {
+                            echo "<div class='seat' data-seat='$i'>" . $i . "</div>";
+                        }
+                    }
+                ?>
+                </div>
+
+                <div style="margin-top:12px;">Selected: <strong id="selectedSeat">None</strong></div>
+                <div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+                    <button id="payForSeat" style="display:none;">Pay & Book Seat</button>
+                    <?php if ($event['price'] == 0): ?>
+                        <button id="freeBookSeat" style="display:none;">Confirm Free Booking</button>
+                    <?php endif; ?>
+                    <button id="closeSeatModal">Close</button>
+                </div>
+                <div id="paypal-seat-container" style="margin-top:14px;"></div>
+            </div>
+        </div>
+
     <?php elseif (!$has_booked && $event['price'] == 0): ?>
         <form method="GET" action="save_booking.php" style="display:inline;">
             <input type="hidden" name="event_id" value="<?php echo $event['id']; ?>">
@@ -119,6 +158,13 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         var showBtn = document.getElementById('showPurchaseBtn');
+        var openSeat = document.getElementById('openSeatMap');
+        var seatModal = document.getElementById('seatModal');
+        var closeSeat = document.getElementById('closeSeatModal');
+        var selectedSeatEl = document.getElementById('selectedSeat');
+        var payForSeatBtn = document.getElementById('payForSeat');
+        var freeBookBtn = document.getElementById('freeBookSeat');
+
         if(showBtn){
             showBtn.addEventListener('click', function(){
                 document.getElementById('purchase').style.display='block';
@@ -126,34 +172,78 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
                 renderPayPal();
             });
         }
+
+        if(openSeat){
+            openSeat.addEventListener('click', function(){ seatModal.style.display='flex'; });
+        }
+        if(closeSeat){
+            closeSeat.addEventListener('click', function(){
+                seatModal.style.display='none';
+                document.getElementById('paypal-seat-container').innerHTML = '';
+            });
+        }
+
+        // Seat click handler
+        document.querySelectorAll('#seat-grid .seat').forEach(function(el){
+            el.addEventListener('click', function(){
+                if (el.classList.contains('booked')) return;
+                // clear previous selected
+                document.querySelectorAll('#seat-grid .seat').forEach(function(s){ s.classList.remove('selected'); });
+                el.classList.add('selected');
+                var seat = el.getAttribute('data-seat');
+                selectedSeatEl.textContent = seat;
+                payForSeatBtn.style.display = 'inline-block';
+                if (freeBookBtn) freeBookBtn.style.display = 'inline-block';
+
+                // Initialize PayPal button for this seat
+                initPayPalForSeat(seat);
+            });
+        });
+
+        // Pay button (for free entries will be handled directly)
+        if (freeBookBtn) {
+            freeBookBtn.addEventListener('click', function(){
+                var seat = document.getElementById('seat-grid').querySelector('.selected').getAttribute('data-seat');
+                window.location.href = "save_booking.php?event_id=<?php echo $event['id']; ?>&seat=" + seat + "&qty=1&status=Free";
+            });
+        }
+
     });
 
-    function renderPayPal(){
+    function initPayPalForSeat(seat) {
         var price = <?php echo floatval($event['price']); ?>;
-        var pxid = 'paypal-button-container';
+        var target = document.getElementById('paypal-seat-container');
+        target.innerHTML = ''; // clear previous
         paypal.Buttons({
             createOrder: function(data, actions) {
-                var qty = parseInt(document.getElementById('ticket-qty').value) || 1;
-                var total = (price * qty).toFixed(2);
                 return actions.order.create({
-                    purchase_units: [{
-                        amount: { currency_code: 'INR', value: total }
-                    }]
+                    purchase_units: [{ amount: { currency_code: 'INR', value: (price).toFixed(2) } }]
                 });
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    var qty = parseInt(document.getElementById('ticket-qty').value) || 1;
-                    // Redirect to save booking with quantity
-                    window.location.href = "save_booking.php?event_id=<?php echo $event['id']; ?>&seat=General&qty=" + qty + "&status=Paid";
+                    // Redirect and include seat
+                    window.location.href = "save_booking.php?event_id=<?php echo $event['id']; ?>&seat=" + seat + "&qty=1&status=Paid";
                 });
             },
             onError: function(err){
                 console.error('Payment error:', err);
-                alert('Payment error. Please try again.');
+                alert('Payment failed. Please try again.');
             }
-        }).render('#' + pxid);
+        }).render('#paypal-seat-container');
     }
+
+    // If user came from select_seat.php with preselect parameter, auto-open modal and select
+    (function(){
+        const params = new URLSearchParams(window.location.search);
+        const pre = params.get('preselect_seat');
+        if(pre){
+            document.getElementById('seatModal').style.display='flex';
+            const el = document.querySelector('#seat-grid .seat[data-seat="'+pre+'"]');
+            if(el) el.click();
+        }
+    })();
+
 </script>
 </div>
 

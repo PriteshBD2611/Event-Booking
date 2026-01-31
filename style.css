@@ -32,7 +32,7 @@ a:hover {
 
 body {
     background: linear-gradient(135deg, #0f172a, #020617);
-    color: #e5e7eb;
+    color: #000000;
     min-height: 100vh;
 }
 
@@ -49,8 +49,52 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 24px;
-    margin-bottom: 20px;
+    margin: 24px auto; /* center horizontally */
+    max-width: 1100px;
+    text-align: center; /* headings and CTAs centered */
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Seat / Modal styles */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(2,6,23,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.modal-content {
+    background: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 720px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/* Seat visual states */
+.seat.booked, .seat.taken {
+    background: #ef4444;
+    cursor: not-allowed;
+    pointer-events: none;
+    color: #fff;
+}
+
+.seat.selected {
+    background: #22c55e;
+    color: #020617;
+    font-weight: 800;
+}
+
+#seat-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+    margin-top: 12px;
 }
 
 /* Event Grid & Cards */
@@ -65,7 +109,7 @@ body {
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    color: #e6eef8;
+    color: #000000;
     transition: transform .2s, box-shadow .2s;
     cursor: default;
     border: 1px solid rgba(255,255,255,0.04);
@@ -128,11 +172,11 @@ body {
 .event-card h3 {
     font-size: 16px;
     margin: 0;
-    color: #ffffff;
+    color: #000000;
 }
 
 .event-card .meta {
-    color: #9CA3AF;
+    color: #000000;
     font-size: 13px;
 }
 
@@ -204,7 +248,7 @@ input, select {
     outline: none;
     margin-bottom: 14px;
     background: #020617;
-    color: #e5e7eb;
+    color: #000000;
     border: 1px solid #1e293b;
 }
 
@@ -225,7 +269,7 @@ th, td {
 }
 
 td {
-    color: #e5e7eb;
+    color: #000000;
 }
 
 th {

@@ -7,6 +7,9 @@ if (!isset($_GET['id'])) {
 }
 
 $event_id = $_GET['id'];
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php'); exit();
+}
 $user_id = $_SESSION['user_id'];
 
 // 1. Get List of Already Booked Seats
@@ -65,10 +68,10 @@ while ($row = mysqli_fetch_assoc($result)) {
             // Check if this seat number is in the "booked" array
             if (in_array($i, $booked_seats)) {
                 // Seat is Taken
-                echo "<div class='seat taken'>$i</div>";
+                echo "<div class='seat booked'>$i</div>";
             } else {
-                // Seat is Available -> Link to Payment Page with seat number
-                echo "<a href='buy_ticket.php?id=$event_id&seat=$i' class='seat'>$i</a>";
+                // Seat is Available -> Go back to event page and preselect seat
+                echo "<a href='view_event.php?id=$event_id&preselect_seat=$i' class='seat'>$i</a>";
             }
         }
         ?>
