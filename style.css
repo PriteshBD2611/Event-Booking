@@ -9,11 +9,11 @@
 }
 /* Force visible text everywhere */
 body, p, label, span, div {
-    color: #000000;
+    color: #e5e7eb; /* light grey */
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #000000;
+    color: #e5e7eb;
 }
 
 a {
@@ -32,7 +32,7 @@ a:hover {
 
 body {
     background: linear-gradient(135deg, #0f172a, #020617);
-    color: #000000;
+    color: #e5e7eb;
     min-height: 100vh;
 }
 
@@ -67,7 +67,7 @@ body {
 }
 .modal-content {
     background: #ffffff;
-    color: #000000;
+    color: #020617; /* modal on light bg: keep dark text */
     padding: 20px;
     border-radius: 12px;
     width: 90%;
@@ -109,7 +109,7 @@ body {
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    color: #000000;
+    color: #e5e7eb;
     transition: transform .2s, box-shadow .2s;
     cursor: default;
     border: 1px solid rgba(255,255,255,0.04);
@@ -172,11 +172,11 @@ body {
 .event-card h3 {
     font-size: 16px;
     margin: 0;
-    color: #000000;
+    color: #e5e7eb;
 }
 
 .event-card .meta {
-    color: #000000;
+    color: #cbd5e1;
     font-size: 13px;
 }
 
@@ -185,22 +185,30 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
+    gap: 12px;
+    flex-wrap: nowrap; /* keep price and button on one line */
 }
 
 .event-card .price {
     font-weight: 700;
-    color: #16a34a;
+    color: #e5e7eb; /* same light grey as body text */
     font-size: 16px;
 }
 
 .event-card .cta {
-    background: linear-gradient(135deg,#16a34a,#10b981);
-    color: #ffffff;
+    /* unify with global button style */
+    background: linear-gradient(135deg, #6366f1, #22d3ee);
+    color: #040025;
     padding: 8px 12px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; /* prevent button text wrapping */
+    flex-shrink: 0; /* prevent button from shrinking and wrapping onto next line */
 }
 
 /* Responsive */
@@ -248,7 +256,7 @@ input, select {
     outline: none;
     margin-bottom: 14px;
     background: #020617;
-    color: #000000;
+    color: #e5e7eb;
     border: 1px solid #1e293b;
 }
 
@@ -269,7 +277,7 @@ th, td {
 }
 
 td {
-    color: #000000;
+    color: #e5e7eb;
 }
 
 th {

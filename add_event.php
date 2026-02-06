@@ -61,14 +61,14 @@ if (isset($_POST['submit_event'])) {
     <link rel="stylesheet" href="style.css">
     <title>Post Financial Seminar</title>
     <style>
-        body { font-family: sans-serif; background-color: #111827; color: #000000; padding: 20px; }
+        body { font-family: sans-serif; background-color: #111827; color: #e5e7eb; padding: 20px; }
         .container { background: #1F2937; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
-        h2 { color: #000000; }
-        label { color: #000000; display: block; margin-top: 10px; }
-        input, select, textarea { display: block; margin: 5px 0 15px; padding: 8px; width: 100%; background: #111827; color: #000000; border: 1px solid #9CA3AF; }
-        button { background: #8B5CF6; color: #000000; border: none; padding: 10px; width: 100%; cursor: pointer; }
-        button:hover { background: #00E5FF; }
-        a { color: #00E5FF; }
+        h2 { color: #e5e7eb; }
+        label { color: #e5e7eb; display: block; margin-top: 10px; }
+        input, select, textarea { display: block; margin: 5px 0 15px; padding: 8px; width: 100%; background: #111827; color: #e5e7eb; border: 1px solid #9CA3AF; }
+        button { background: #6366f1; color: #040025; border: none; padding: 10px; width: 100%; cursor: pointer; }
+        button:hover { background: #22d3ee; }
+        a { color: #22d3ee; }
     </style>
 </head>
 <body>

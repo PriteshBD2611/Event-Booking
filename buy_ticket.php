@@ -26,9 +26,9 @@ $seat_number = $_GET['seat']; // Get the seat user clicked
     <title>Buy Ticket</title>
     <script src="https://www.paypal.com/sdk/js?client-id=Ad3PJuzwknTqCnmIMI767plher_kOKbRB2R3JK_dooW8GNFt0Gh4o3GBsaYCyI09CBhzNFdvlLTzc_UK&currency=USD"></script>
     <style>
-        body { font-family: sans-serif; background-color: #111827; color: #000000; padding: 20px; }
-        h2 { color: #000000; }
-        p { color: #000000; }
+        body { font-family: sans-serif; background-color: #111827; color: #e5e7eb; padding: 20px; }
+        h2 { color: #e5e7eb; }
+        p { color: #e5e7eb; }
         #paypal-button-container { margin-top: 20px; }
     </style>
 </head>

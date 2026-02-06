@@ -48,8 +48,9 @@ a { color: #00E5FF; }
         <input type="password" name="password" placeholder="Password" required><br><br>
         <button type="submit" name="login">Login</button>
     </form>
+    <p>Don't have an account? <a href="register.php">Register here</a></p>
      </div>
 </div>
-    <p>Don't have an account? <a href="register.php">Register here</a></p>
+    
 </body>
 </html>

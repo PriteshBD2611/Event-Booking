@@ -35,16 +35,16 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     <link rel="stylesheet" href="style.css">
     <title><?php echo $event['title']; ?> - Details</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background-color: #111827; color: #000000; }
-        .nav { background: #1F2937; padding: 10px; color: #000000; margin-bottom: 20px; }
-        .nav a { color: #000000; margin-right: 15px; text-decoration: none; }
-        .event-details { max-width: 800px; margin: 0 auto; background: #1F2937; padding: 20px; border-radius: 8px; color: #000000; }
+        body { font-family: sans-serif; padding: 20px; background-color: #111827; color: #e5e7eb; }
+        .nav { background: #1F2937; padding: 10px; color: #e5e7eb; margin-bottom: 20px; }
+        .nav a { color: #e5e7eb; margin-right: 15px; text-decoration: none; }
+        .event-details { max-width: 800px; margin: 0 auto; background: #1F2937; padding: 20px; border-radius: 8px; color: #e5e7eb; }
         .event-image { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
         .map { width: 100%; height: 300px; border: none; }
         .reviews { margin-top: 20px; }
-        .review { border-bottom: 1px solid #9CA3AF; padding: 10px 0; color: #000000; }
-        button { background-color: #8B5CF6; color: #000000; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
-        button:hover { background-color: #00E5FF; }
+        .review { border-bottom: 1px solid #9CA3AF; padding: 10px 0; color: #e5e7eb; }
+        button { background-color: #6366f1; color: #040025; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #22d3ee; }
     </style>
     <script src="https://www.paypal.com/sdk/js?client-id=Ad3PJuzwknTqCnmIMI767plher_kOKbRB2R3JK_dooW8GNFt0Gh4o3GBsaYCyI09CBhzNFdvlLTzc_UK&currency=INR"></script>
 </head>
@@ -68,10 +68,10 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     
     <h1><?php echo $event['title']; ?> <small style="color: #9CA3AF;">(<?php echo $event['category']; ?>)</small></h1>
     
-    <p style="color: #000000;"><strong style="color: #000000;">Speaker:</strong> <?php echo $event['speaker'] ? $event['speaker'] : 'TBA'; ?></p>
-    <p style="color: #000000;"><strong style="color: #000000;">Description:</strong> <?php echo $event['description']; ?></p>
-    <p style="color: #000000;"><strong style="color: #000000;">Price:</strong> ₹<?php echo $event['price']; ?></p>
-    <p style="color: #000000;"><strong style="color: #000000;">Date:</strong> <?php echo $event['event_date']; ?></p>
+    <p><strong>Speaker:</strong> <?php echo $event['speaker'] ? $event['speaker'] : 'TBA'; ?></p>
+    <p><strong>Description:</strong> <?php echo $event['description']; ?></p>
+    <p><strong>Price:</strong> ₹<?php echo $event['price']; ?></p>
+    <p><strong>Date:</strong> <?php echo $event['event_date']; ?></p>
     
     <?php if ($has_booked): ?>
         <p style="color: green;"><strong>You have booked this event!</strong></p>
@@ -85,8 +85,8 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
         <?php if (mysqli_num_rows($reviews_result) > 0): ?>
             <?php while ($review = mysqli_fetch_assoc($reviews_result)): ?>
                 <div class="review">
-                    <strong style="color: #000000;"><?php echo $review['username']; ?>:</strong> <span style="color: #000000;"><?php echo str_repeat('⭐', $review['rating']); ?> (<?php echo $review['rating']; ?>/5)</span><br>
-                    <span style="color: #000000;"><?php echo $review['comment']; ?></span>
+                    <strong><?php echo $review['username']; ?>:</strong> <span><?php echo str_repeat('⭐', $review['rating']); ?> (<?php echo $review['rating']; ?>/5)</span><br>
+                    <span><?php echo $review['comment']; ?></span>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
@@ -105,7 +105,7 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
 
         <div id="purchase" style="display:none; margin-top:16px; text-align:center;">
             <label>Quantity</label>
-            <input type="number" id="ticket-qty" min="1" value="1" style="width:80px; padding:8px; border-radius:8px; margin:8px 0; background:#020617; color:#000000; border:1px solid #1e293b;">
+            <input type="number" id="ticket-qty" min="1" value="1" style="width:80px; padding:8px; border-radius:8px; margin:8px 0; background:#020617; color:#e5e7eb; border:1px solid #1e293b;">
             <div id="paypal-button-container"></div>
         </div>
 
