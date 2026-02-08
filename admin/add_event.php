@@ -8,11 +8,11 @@ error_reporting(E_ALL);
 ?>
 <?php
 session_start();
-include 'db_connect.php';
+include '../config/db.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    die("Access Denied. Please <a href='login.php'>login</a> to post an event.");
+    die("Access Denied. Please <a href='../login.php'>login</a> to post an event.");
 }
 
 if (isset($_POST['submit_event'])) {
@@ -26,7 +26,7 @@ if (isset($_POST['submit_event'])) {
     $user_id = $_SESSION['user_id'];
 
     // --- IMAGE UPLOAD LOGIC ---
-    $target_dir = "uploads/";
+    $target_dir = "../uploads/";
     $image_name = basename($_FILES["event_image"]["name"]);
     $target_file = $target_dir . time() . "_" . $image_name; // Adding time() makes the name unique
     $uploadOk = 1;
@@ -48,7 +48,7 @@ if (isset($_POST['submit_event'])) {
             VALUES ('$title', '$target_file', '$desc', '$location', '$price', '$date', '$user_id', '$speaker', '$category')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "<h3>Event Posted Successfully! <a href='index.php'>View Website</a></h3>";
+        echo "<h3>Event Posted Successfully! <a href='../index.php'>View Website</a></h3>";
     } else {
         echo "Error: " . mysqli_error($conn);
     }
@@ -58,7 +58,7 @@ if (isset($_POST['submit_event'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Post Financial Seminar</title>
     <style>
         body { font-family: sans-serif; background-color: #111827; color: #e5e7eb; padding: 20px; }
@@ -72,7 +72,7 @@ if (isset($_POST['submit_event'])) {
     </style>
 </head>
 <body>
-    <a href="logout.php" style="float:right;">Logout</a>
+    <a href="../logout.php" style="float:right;">Logout</a>
     <div class="container">
     <div class="card">
     <h2>Post a New Financial Seminar</h2>

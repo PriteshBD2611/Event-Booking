@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include 'config/db.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -37,7 +37,7 @@ $use_mock_payment = true; // Set to false when you have real Razorpay key
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Buy Ticket</title>
     <style>
         body { font-family: sans-serif; background-color: #111827; color: #e5e7eb; padding: 20px; }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include 'config/db.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -32,7 +32,7 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title><?php echo $event['title']; ?> - Details</title>
     <style>
         body { font-family: sans-serif; padding: 20px; background-color: #111827; color: #e5e7eb; }
@@ -53,9 +53,9 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     <strong style="margin-right: 20px;">Event Booking Site</strong>
     <a href="index.php">Home</a>
     <a href="my_bookings.php">My Tickets</a>
-    <a href="add_event.php">Post Event</a>
+    <a href="admin/add_event.php">Post Event</a>
     <?php if($_SESSION['role'] == 'admin'): ?>
-        <a href="admin_dashboard.php">Admin Dashboard</a>
+        <a href="admin/dashboard.php">Admin Dashboard</a>
     <?php endif; ?>
     <a href="logout.php" style="float:right;">Logout (<?php echo $_SESSION['username']; ?>)</a>
 </div>

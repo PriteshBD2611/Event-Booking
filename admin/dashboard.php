@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include '../config/db.php';
 
 // Security: Only Admins can see this
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
@@ -27,7 +27,7 @@ $total_sold = $tickets_data['total_sold'];
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <title>Admin Financial Dashboard</title>
     <style>
@@ -112,6 +112,6 @@ $total_sold = $tickets_data['total_sold'];
     </div>
     </div>
     <br>
-    <a href="add_event.php">Post New Event</a> | <a href="index.php">View Website</a> | <a href="logout.php">Logout</a>
+    <a href="add_event.php">Post New Event</a> | <a href="../index.php">View Website</a> | <a href="../logout.php">Logout</a>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include '../config/db.php';
 
 // Check if user is Admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
@@ -16,7 +16,7 @@ if (isset($event_id)) {
     
     $sql = "DELETE FROM events WHERE id = '$event_id'";
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Event Deleted Successfully!'); window.location.href='admin_dashboard.php';</script>";
+        echo "<script>alert('Event Deleted Successfully!'); window.location.href='dashboard.php';</script>";
     } else {
         echo "Error: " . mysqli_error($conn);
     }

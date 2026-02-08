@@ -1,13 +1,6 @@
 <?php
-// Add these lines to see errors
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// ... rest of your code ...
-?><?php
 session_start();
-include 'db_connect.php';
+include 'config/db.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -18,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <title>My Tickets</title>
     <style>

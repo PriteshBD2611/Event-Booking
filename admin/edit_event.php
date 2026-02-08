@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include '../config/db.php';
 
 // Check if user is Admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
@@ -26,7 +26,7 @@ if (isset($_POST['update_event'])) {
     // Image upload if new
     $target_file = $event['image_path'];
     if (!empty($_FILES["event_image"]["name"])) {
-        $target_dir = "uploads/";
+        $target_dir = "../uploads/";
         $image_name = basename($_FILES["event_image"]["name"]);
         $target_file = $target_dir . time() . "_" . $image_name;
         move_uploaded_file($_FILES["event_image"]["tmp_name"], $target_file);
@@ -35,7 +35,7 @@ if (isset($_POST['update_event'])) {
     $sql = "UPDATE events SET title='$title', image_path='$target_file', description='$desc', location_url='$location', price='$price', event_date='$date', speaker='$speaker', category='$category' WHERE id='$event_id'";
 
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Event Updated Successfully!'); window.location.href='admin_dashboard.php';</script>";
+        echo "<script>alert('Event Updated Successfully!'); window.location.href='dashboard.php';</script>";
     } else {
         echo "Error: " . mysqli_error($conn);
     }
@@ -97,7 +97,7 @@ if (isset($_POST['update_event'])) {
             <button type="submit" name="update_event">Update Event</button>
         </form>
         <br>
-        <a href="admin_dashboard.php">Back to Dashboard</a>
+        <a href="dashboard.php">Back to Dashboard</a>
     </div>
 </body>
 </html>

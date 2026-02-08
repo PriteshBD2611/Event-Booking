@@ -1,0 +1,32 @@
+# Configuration files with sensitive data
+config/db.php
+config/*.php
+
+# Environment variables
+.env
+.env.local
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# Uploads (optional - comment out if you want to track some uploads)
+uploads/*
+uploads/posters/*
+!uploads/.gitkeep
+!uploads/posters/.gitkeep
+
+# Node modules (if you add npm packages later)
+node_modules/
+package-lock.json
+
+# Cache files
+*.cache
+.cache/

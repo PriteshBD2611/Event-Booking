@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include 'config/db.php';
 
 if (isset($_GET['event_id']) && isset($_SESSION['user_id'])) {
     $event_id = $_GET['event_id'];

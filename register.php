@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php';
+include 'config/db.php';
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
@@ -23,7 +23,7 @@ if (isset($_POST['register'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 <title>Register - Event Booking Site</title>
 <style>
 body { font-family: sans-serif; background-color: #111827; color: #F9FAFB; padding: 20px; }

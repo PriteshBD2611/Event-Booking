@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include 'config/db.php';
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -26,7 +26,7 @@ if (isset($_POST['login'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 <title>Login - Event Booking Site</title>
 <style>
 body { font-family: sans-serif; background-color: #111827; color: #F9FAFB; padding: 20px; }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+include 'config/db.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -42,7 +42,7 @@ error_reporting(E_ALL);
 ?><!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Rate Event</title>
     <style>

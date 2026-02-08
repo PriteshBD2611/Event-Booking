@@ -1,12 +1,12 @@
 <?php 
 session_start();
-include 'db_connect.php'; 
+include 'config/db.php'; 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Event Booking Site - Financial Seminars</title>
     <style>
@@ -55,9 +55,9 @@ include 'db_connect.php';
         <a href="index.php">Home</a>
         <?php if(isset($_SESSION['user_id'])): ?>
             <a href="my_bookings.php">My Tickets</a>
-            <a href="add_event.php">Post Event</a>
+            <a href="admin/add_event.php">Post Event</a>
             <?php if($_SESSION['role'] == 'admin'): ?>
-                <a href="admin_dashboard.php">Admin Dashboard</a>
+                <a href="admin/dashboard.php">Admin Dashboard</a>
             <?php endif; ?>
             <a href="logout.php" style="float:right;">Logout (<?php echo $_SESSION['username']; ?>)</a>
         <?php else: ?>
