@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-<title>Login - Connect</title>
+<title>Login - Event Booking Site</title>
 <style>
 body { font-family: sans-serif; background-color: #111827; color: #F9FAFB; padding: 20px; }
 h2 { color: #F9FAFB; }

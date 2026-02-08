@@ -24,7 +24,7 @@ if (isset($_POST['register'])) {
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-<title>Register - Connect</title>
+<title>Register - Event Booking Site</title>
 <style>
 body { font-family: sans-serif; background-color: #111827; color: #F9FAFB; padding: 20px; }
 .container { background: #1F2937; padding: 20px; border-radius: 8px; max-width: 400px; margin: 0 auto; }

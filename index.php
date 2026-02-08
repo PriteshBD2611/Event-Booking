@@ -8,7 +8,7 @@ include 'db_connect.php';
 <head>
     <link rel="stylesheet" href="style.css">
 
-    <title>Connect - Financial Seminars</title>
+    <title>Event Booking Site - Financial Seminars</title>
     <style>
         body { font-family: sans-serif; padding: 20px; background-color: #111827; color: #e5e7eb; }
         .nav { background: #1F2937; padding: 10px; color: #e5e7eb; margin-bottom: 20px; border-radius: 8px; }
@@ -50,7 +50,7 @@ include 'db_connect.php';
 <body>
 
 <div class="nav">
-        <strong style="margin-right: 20px;">CONNECT</strong>
+        <strong style="margin-right: 20px;">Event Booking Site</strong>
         <ul style="list-style:none; display:inline; padding: 10px; margin: 10px;">
         <a href="index.php">Home</a>
         <?php if(isset($_SESSION['user_id'])): ?>

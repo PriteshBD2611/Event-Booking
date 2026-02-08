@@ -50,7 +50,7 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
 <body>
 
 <div class="nav">
-    <strong style="margin-right: 20px;">CONNECT</strong>
+    <strong style="margin-right: 20px;">Event Booking Site</strong>
     <a href="index.php">Home</a>
     <a href="my_bookings.php">My Tickets</a>
     <a href="add_event.php">Post Event</a>
