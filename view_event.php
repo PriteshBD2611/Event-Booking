@@ -11,22 +11,22 @@ $event_id = $_GET['id'];
 $user_id = $_SESSION['user_id'];
 
 // Fetch event details
-$sql = "SELECT * FROM events WHERE id = '$event_id'";
-$result = mysqli_query($conn, $sql);
-$event = mysqli_fetch_assoc($result);
+$stmt = $conn->prepare("SELECT * FROM events WHERE id = ?");
+$stmt->execute([$event_id]);
+$event = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$event) {
     die("Event not found.");
 }
 
 // Check if user has booked
-$booked_sql = "SELECT * FROM bookings WHERE user_id = '$user_id' AND event_id = '$event_id'";
-$booked_result = mysqli_query($conn, $booked_sql);
-$has_booked = mysqli_num_rows($booked_result) > 0;
+$booked_stmt = $conn->prepare("SELECT * FROM bookings WHERE user_id = ? AND event_id = ?");
+$booked_stmt->execute([$user_id, $event_id]);
+$has_booked = $booked_stmt->fetch() ? true : false;
 
 // Fetch reviews
-$reviews_sql = "SELECT reviews.rating, reviews.comment, users.username FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.event_id = '$event_id'";
-$reviews_result = mysqli_query($conn, $reviews_sql);
+$reviews_stmt = $conn->prepare("SELECT reviews.rating, reviews.comment, users.username FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.event_id = ?");
+$reviews_stmt->execute([$event_id]);
 ?>
 
 <!DOCTYPE html>
@@ -81,8 +81,8 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     
     <div class="reviews">
         <h3 style="color: #F9FAFB;">Reviews</h3>
-        <?php if (mysqli_num_rows($reviews_result) > 0): ?>
-            <?php while ($review = mysqli_fetch_assoc($reviews_result)): ?>
+        <?php if ($reviews_stmt->rowCount() > 0): ?>
+            <?php while ($review = $reviews_stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <div class="review">
                     <strong><?php echo $review['username']; ?>:</strong> <span><?php echo str_repeat('⭐', $review['rating']); ?> (<?php echo $review['rating']; ?>/5)</span><br>
                     <span><?php echo $review['comment']; ?></span>
@@ -98,7 +98,7 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
 
     <?php if (!$has_booked && $event['price'] > 0): ?>
         <div style="display:flex; gap:12px; justify-content:center; margin-top:12px;">
-            <button id="openSeatMap">Select Seat & Book</button>
+            <a href="select_seat.php?id=<?php echo $event_id; ?>" style="background-color: #6366f1; color: #040025; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; font-weight: bold;">🎫 Select Seats & Book Now</a>
         </div>
 
         <div id="purchase" style="display:none; margin-top:16px; text-align:center;">
@@ -113,10 +113,10 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
                 <h3>Select a Seat</h3>
                 <div id="seat-grid">
                 <?php
-                    $booked_q = "SELECT seat_number FROM bookings WHERE event_id = '$event_id'";
-                    $res_bs = mysqli_query($conn, $booked_q);
+                    $booked_stmt = $conn->prepare("SELECT seat_number FROM bookings WHERE event_id = ?");
+                    $booked_stmt->execute([$event_id]);
                     $booked_arr = [];
-                    while ($b = mysqli_fetch_assoc($res_bs)) { $booked_arr[] = $b['seat_number']; }
+                    while ($b = $booked_stmt->fetch(PDO::FETCH_ASSOC)) { $booked_arr[] = $b['seat_number']; }
 
                     for ($i=1; $i<=50; $i++) {
                         if (in_array($i, $booked_arr)) {
