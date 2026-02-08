@@ -99,7 +99,6 @@ $reviews_result = mysqli_query($conn, $reviews_sql);
     <?php if (!$has_booked && $event['price'] > 0): ?>
         <div style="display:flex; gap:12px; justify-content:center; margin-top:12px;">
             <button id="openSeatMap">Select Seat & Book</button>
-            <button id="showPurchaseBtn">Purchase without Seat</button>
         </div>
 
         <div id="purchase" style="display:none; margin-top:16px; text-align:center;">
